@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>野球スコアブック解析</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>野球スコアブック解析</h1>
+    <p class="subtitle">Baseball Scorebook Analyzer — Powered by Claude Vision</p>
+  </header>
+
+  <main>
+    <!-- Upload zone -->
+    <section id="upload-section">
+      <div id="drop-zone" role="button" tabindex="0" aria-label="スコアブック画像をここにドロップ">
+        <span class="drop-icon">📋</span>
+        <p>スコアブック画像をドロップ</p>
+        <p class="hint">または</p>
+        <label for="file-input" class="file-btn">ファイルを選択</label>
+        <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" hidden />
+      </div>
+
+      <div id="preview-wrapper" hidden>
+        <img id="image-preview" alt="プレビュー" />
+        <button id="clear-btn" aria-label="クリア">✕ クリア</button>
+      </div>
+    </section>
+
+    <section id="action-section">
+      <button id="analyze-btn" disabled>解析する (Analyze)</button>
+    </section>
+
+    <!-- Loading -->
+    <div id="loading" hidden aria-live="polite">
+      <div class="spinner"></div>
+      <p>Claude Vision で解析中...</p>
+    </div>
+
+    <!-- Error -->
+    <div id="error-box" hidden role="alert">
+      <strong>エラー:</strong> <span id="error-msg"></span>
+    </div>
+
+    <!-- Results -->
+    <section id="results" hidden>
+      <h2>解析結果</h2>
+
+      <div class="card">
+        <h3>試合情報</h3>
+        <table id="game-info-table"></table>
+      </div>
+
+      <div class="card">
+        <h3>イニング別スコア</h3>
+        <div class="scroll-x">
+          <table id="inning-table"></table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>打者成績</h3>
+        <div class="scroll-x">
+          <table id="batter-table"></table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>投手成績</h3>
+        <div class="scroll-x">
+          <table id="pitcher-table"></table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>解析メタデータ</h3>
+        <table id="metadata-table"></table>
+      </div>
+
+      <details class="card">
+        <summary>Raw JSON（デバッグ用）</summary>
+        <pre id="raw-json"></pre>
+      </details>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
